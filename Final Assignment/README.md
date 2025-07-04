@@ -48,12 +48,6 @@ Historical price data is fetched using Yahoo Finance via the `yfinance` library.
 
 The PPO agent is trained on price data from 2020 to 2023 using Stable-Baselines3. A normalized vectorized environment (`VecNormalize`) is used to stabilize training. Evaluation is conducted on the 2024 period.
 
-from stable_baselines3 import PPO
-
-model = PPO("MlpPolicy", vec_env, verbose=1)
-model.learn(total_timesteps=500_000, callback=eval_callback)
-model.save("ppo_portfolio_rebalancer")
-
 ---
 
 ## Evaluation

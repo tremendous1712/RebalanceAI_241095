@@ -39,9 +39,21 @@ At each timestep, the reward $R_t$ is defined as a weighted combination of **net
 
 
 
+
+
+
+
+
+
 ```math
  R_t = \alpha \cdot r_t + (1 - \alpha) \cdot S_t
 ```
+
+
+
+
+
+
 
 
 

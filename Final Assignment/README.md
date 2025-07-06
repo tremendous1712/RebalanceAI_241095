@@ -31,8 +31,23 @@ A custom OpenAI Gym-compatible environment (`PortfolioEnv`) simulates multi-asse
 - Continuous vector representing asset weights (softmax-normalized)
 
 ### Reward Function:
-- Weighted combination of log return and Sortino ratio (risk-adjusted)
-- Penalized for transaction cost based on portfolio turnover
+
+The reward **R_t** at each timestep is defined as a weighted combination of net log return and the Sortino ratio over a rolling window:
+
+```
+R_t = α * r_t + (1 - α) * S_t
+```
+
+Where:
+- `r_t = log(P_t / P_{t-1}) - c * turnover_t` is the log return adjusted for transaction cost
+- `S_t = (μ_w / (σ_d + ε)) * sqrt(252)` is the Sortino ratio computed on recent returns
+
+Definitions:
+- `μ_w` = mean return over a reward window
+- `σ_d` = standard deviation of downside returns
+- `ε` = small constant to avoid divide-by-zero
+- `α` = blending weight between return and Sortino
+- `c` = transaction cost coefficient
 
 ---
 

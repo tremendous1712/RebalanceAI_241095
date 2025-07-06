@@ -39,7 +39,6 @@ At each timestep, the reward $R_t$ is defined as a weighted combination of **net
 R_t = \alpha \cdot r_t + (1 - \alpha) \cdot S_t
 ```
 
----
 
 **Where:**
 
@@ -49,7 +48,6 @@ R_t = \alpha \cdot r_t + (1 - \alpha) \cdot S_t
 - $S_t = \left(\frac{\mu_w}{\sigma_d + \varepsilon}\right) \cdot \sqrt{252}$  
   → annualized Sortino ratio over the recent return window
 
----
 
 **Definitions:**
 

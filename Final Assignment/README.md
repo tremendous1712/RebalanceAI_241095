@@ -28,13 +28,12 @@ A Gym-compatible environment (`PortfolioEnv`) simulates multi-asset trading by f
 - Price Relatives
 - Moving Averages (5-day and 20-day)
 - Rolling Volatility (20-day)
-- Relative Strength Index (RSI, 5-day)
 
 ### Action Space:
 - Continuous vector of portfolio weights summing to 1
 
 ### Reward Function:
-- Log return adjusted for transaction costs
+- Log return with transaction cost penalty
 
 ---
 

@@ -30,24 +30,36 @@ A custom OpenAI Gym-compatible environment (`PortfolioEnv`) simulates multi-asse
 ### Action Space:
 - Continuous vector representing asset weights (softmax-normalized)
 
-### Reward Function:
 
-The reward **R_t** at each timestep is defined as a weighted combination of net log return and the Sortino ratio over a rolling window:
+### Reward Function
 
+At each timestep, the reward $R_t$ is defined as a weighted combination of **net log return** and the **Sortino ratio**:
+
+```math
+R_t = \alpha \cdot r_t + (1 - \alpha) \cdot S_t
 ```
-R_t = α * r_t + (1 - α) * S_t
-```
 
-Where:
-- `r_t = log(P_t / P_{t-1}) - c * turnover_t` is the log return adjusted for transaction cost
-- `S_t = (μ_w / (σ_d + ε)) * sqrt(252)` is the Sortino ratio computed on recent returns
+---
 
-Definitions:
-- `μ_w` = mean return over a reward window
-- `σ_d` = standard deviation of downside returns
-- `ε` = small constant to avoid divide-by-zero
-- `α` = blending weight between return and Sortino
-- `c` = transaction cost coefficient
+**Where:**
+
+- $r_t = \log\left(\frac{P_t}{P_{t-1}}\right) - c \cdot \text{turnover}_t$  
+  → net log return after accounting for transaction cost
+
+- $S_t = \left(\frac{\mu_w}{\sigma_d + \varepsilon}\right) \cdot \sqrt{252}$  
+  → annualized Sortino ratio over the recent return window
+
+---
+
+**Definitions:**
+
+| Symbol        | Description                                      |
+|---------------|--------------------------------------------------|
+| $\mu_w$      | Mean return over a rolling reward window         |
+| $\sigma_d$   | Standard deviation of downside returns           |
+| $\varepsilon$| Small constant to avoid division-by-zero         |
+| $\alpha$     | Blending weight between net return and Sortino   |
+| $c$           | Transaction cost coefficient                     |
 
 ---
 
